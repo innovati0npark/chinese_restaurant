@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'seller',
+    'order',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

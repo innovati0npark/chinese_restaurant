@@ -16,9 +16,9 @@
 
 <div class="row">
 {% for food in object_list %}
-            <div class="col-sm-6 col-md-4 mb-4">
+            <div class="col-sm-6 col-md-3 mb-3">
                 <div class="card">
-                    <a href="{% url 'seller:food_detail' pk=food.id %}">
+                    <a href="{% url 'order:order_detail' pk=food.id %}">
                         <img src="{{ food.image_url }}" class="card-img-top food-image" alt="{{ food.name }}">
                         <div class="card-body row">
                             <h5 class="card-title">{{ food.name }}</h5>
@@ -31,7 +31,7 @@
 
 
 
-<h2>요격 폭탄세일</h2>
+<h2>반값세일</h2>
 
 
 </body>

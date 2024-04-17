@@ -28,4 +28,6 @@ urlpatterns = [
     path('accounts/register/', views.UserCreateView.as_view(), name='register'),
     path('accounts/register/done/', views.UserCreateDoneTV.as_view(), name='register_done'),
     path('seller/', include('seller.urls')),
+    path('order/', include('order.urls')),
+
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

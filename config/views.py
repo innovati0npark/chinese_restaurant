@@ -5,9 +5,9 @@ from django.urls import reverse_lazy
 from seller.models import Food
 
 def index(request):
-    foods = Food.objects.all()
+    object_list = Food.objects.all()
     context = {
-        'object_list': foods
+        'object_list': object_list
     }
     return render(request, 'home.html', context=context)
 
