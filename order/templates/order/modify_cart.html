@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 mb-3">장바구니 수정</h1>
+    <form action="{% url 'update_cart' cart_item.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="amount">수량</label>
+            <input type="number" class="form-control" id="amount" name="amount" value="{{ cart_item.amount }}">
+        </div>
+        <button type="submit" class="btn btn-primary">수정하기</button>
+        <a href="{% url 'cart' %}" class="btn btn-secondary">취소</a>
+    </form>
+</div>
+{% endblock %}
