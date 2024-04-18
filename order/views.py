@@ -64,13 +64,16 @@ def add_to_cart(request):
 
 def modify_cart(request, cart_item_id):
     if request.method == 'POST':
-        quantity = int(request.GET.get('quantity'))
-        cart_item = Cart.objects.filter(id=cart_item_id)
-        cart_item.amount += quantity
+        amount = int(request.GET.get('amount', 0))
+        try:
+            cart_item = Cart.objects.get(id=cart_item_id)
+        except Cart.DoesNotExist:
+            return JsonResponse({'error': 'Cart item not found'}, status=404)
+
+        cart_item.amount += amount
         cart_item.save()
 
-        cart = Cart.objects.get(user=request.user)
-        cart_items = Cart.objects.filter(cart=cart)
+        cart_items = Cart.objects.filter(user=request.user)
         total_price = sum(item.food.price * item.amount for item in cart_items)
 
         return JsonResponse({
@@ -80,10 +83,3 @@ def modify_cart(request, cart_item_id):
         })
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
-
-def update_cart(request, cart_item_id):
-    cart_item = get_object_or_404(Cart, id=cart_item_id)
-    new_amount = int(request.POST['amount'])
-    cart_item.amount = new_amount
-    cart_item.save()
-    return redirect('cart')
